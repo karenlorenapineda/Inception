@@ -54,11 +54,41 @@ or simply:
 make
 ```
 
+### Stopping the Stack
+
+To stop the infrastructure and shut down all containers without losing persistent data, run:
+
+```bash
+make down
+```
+
+If you want to stop the containers and clean up all stored data (including volumes, networks, and Docker configurations) to start completely fresh, run:
+
+```bash
+make clean
+```
+
 ---
 
 ## Accessing the Website
 
 After all containers have started successfully, the website can be accessed through a web browser using **HTTPS**.
+
+### Local Domain Configuration
+
+Before accessing the website via the domain name, you must map the domain to your local loopback address inside the virtual machine's hosts configuration.
+
+1. Open `/etc/hosts` with root privileges:
+
+   ```bash
+   sudo nano /etc/hosts
+   ```
+
+2. Add the following line to the end of the file, then save and exit:
+
+   ```text
+   127.0.0.1    kpineda-.42.fr
+   ```
 
 Available URLs:
 
@@ -115,3 +145,11 @@ docker ps
 ```
 
 The command should display the NGINX, WordPress, and MariaDB containers in the **Up** state.
+
+Additionally, you can run:
+
+```bash
+docker compose ps
+```
+
+To view the status of all services belonging to this stack.
